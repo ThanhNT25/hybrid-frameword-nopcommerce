@@ -5,26 +5,25 @@ import org.testng.annotations.Test;
 import commons.BaseTest;
 import pageObjects.HomePageObject;
 import pageObjects.LoginPageObject;
+import pageObjects.CustomerInfoPageObject;
 import pageObjects.PageGeneratorManager;
 import pageObjects.RegisterPageObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
 public class Level_06_Page_Generator_Manager extends BaseTest {
   private WebDriver driver;
   private String invalidEmail, existingEmail, notFoundEmail;
-  private String projectPath = System.getProperty("user.dir");
   private String firstName, lastName, correctPassword, incorrectPassword, confirmPassword;
   private HomePageObject homePage  ;
   private RegisterPageObject registerPage  ;
   private LoginPageObject loginPage;
+  private CustomerInfoPageObject myAccountPage;
     
   @Parameters("browser")
   @BeforeClass
@@ -157,11 +156,11 @@ public class Level_06_Page_Generator_Manager extends BaseTest {
 	  loginPage.inputToPasswordTextbox(correctPassword);	
 	  
 	  System.out.println("Login_04 Step 04: Click to LOGIN button");
-	  loginPage.clickToLoginButton();
-	  
-	  homePage = PageGeneratorManager.getHomePage(driver);
-	  
+	  homePage = loginPage.clickToLoginButton();
 	  Assert.assertTrue(homePage.isMyAccountLinkDisplayed());
+	  
+	  myAccountPage = homePage.clickToMyAccountLink();
+	  
   }
 
 
