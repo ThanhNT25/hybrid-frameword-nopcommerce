@@ -3,14 +3,14 @@ package com.nopcommerce.user;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
-import pageObjects.HomePageObject;
-import pageObjects.LoginPageObject;
-import pageObjects.MyProductReviewPageObject;
-import pageObjects.AddressPageObject;
-import pageObjects.CustomerInfoPageObject;
-import pageObjects.PageGeneratorManager;
-import pageObjects.RegisterPageObject;
-import pageObjects.RewardPointPageObject;
+import commons.PageGeneratorManager;
+import pageObjects.nopCommerce.user.UserAddressPageObject;
+import pageObjects.nopCommerce.user.UserCustomerInfoPageObject;
+import pageObjects.nopCommerce.user.UserHomePageObject;
+import pageObjects.nopCommerce.user.UserLoginPageObject;
+import pageObjects.nopCommerce.user.UserMyProductReviewPageObject;
+import pageObjects.nopCommerce.user.UserRegisterPageObject;
+import pageObjects.nopCommerce.user.UserRewardPointPageObject;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -22,23 +22,22 @@ import org.testng.annotations.AfterClass;
 
 public class Level_07_Switch_Page extends BaseTest {
   private WebDriver driver;
-  private String invalidEmail, existingEmail, notFoundEmail;
-  private String firstName, lastName, correctPassword, incorrectPassword, confirmPassword;
-  private HomePageObject homePage  ;
-  private RegisterPageObject registerPage  ;
-  private LoginPageObject loginPage;
-  private CustomerInfoPageObject customerInfoPage;
-  private AddressPageObject addressPage;
-  private MyProductReviewPageObject myProductReviewPage;
-  private RewardPointPageObject rewardPointPage;
+  private String  existingEmail;
+  private String firstName, lastName, correctPassword, confirmPassword;
+  private UserHomePageObject homePage  ;
+  private UserRegisterPageObject registerPage  ;
+  private UserLoginPageObject loginPage;
+  private UserCustomerInfoPageObject customerInfoPage;
+  private UserAddressPageObject addressPage;
+  private UserMyProductReviewPageObject myProductReviewPage;
+  private UserRewardPointPageObject rewardPointPage;
     
   @Parameters("browser")
   @BeforeClass
   public void beforeClass(String browserName) {
 	  driver = getBrowserDriver(browserName);
-	  driver.get("https://demo.nopcommerce.com/");
 	  
-	  homePage = PageGeneratorManager.getHomePage(driver);
+	  homePage = PageGeneratorManager.getUserHomePage(driver);
 	  
 	  existingEmail = "auto"+generateNumber()+"@gmail.com";
 	  firstName = "Automation";

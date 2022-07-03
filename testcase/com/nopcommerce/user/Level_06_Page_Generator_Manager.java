@@ -3,11 +3,12 @@ package com.nopcommerce.user;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
-import pageObjects.HomePageObject;
-import pageObjects.LoginPageObject;
-import pageObjects.CustomerInfoPageObject;
-import pageObjects.PageGeneratorManager;
-import pageObjects.RegisterPageObject;
+import commons.PageGeneratorManager;
+import pageObjects.nopCommerce.user.UserCustomerInfoPageObject;
+import pageObjects.nopCommerce.user.UserHomePageObject;
+import pageObjects.nopCommerce.user.UserLoginPageObject;
+import pageObjects.nopCommerce.user.UserRegisterPageObject;
+
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
@@ -20,10 +21,10 @@ public class Level_06_Page_Generator_Manager extends BaseTest {
   private WebDriver driver;
   private String invalidEmail, existingEmail, notFoundEmail;
   private String firstName, lastName, correctPassword, incorrectPassword, confirmPassword;
-  private HomePageObject homePage  ;
-  private RegisterPageObject registerPage  ;
-  private LoginPageObject loginPage;
-  private CustomerInfoPageObject myAccountPage;
+  private UserHomePageObject homePage  ;
+  private UserRegisterPageObject registerPage  ;
+  private UserLoginPageObject loginPage;
+  private UserCustomerInfoPageObject myAccountPage;
     
   @Parameters("browser")
   @BeforeClass
@@ -31,7 +32,7 @@ public class Level_06_Page_Generator_Manager extends BaseTest {
 	  driver = getBrowserDriver(browserName);
 	  driver.get("https://demo.nopcommerce.com/");
 	  
-	  homePage = PageGeneratorManager.getHomePage(driver);
+	  homePage = PageGeneratorManager.getUserHomePage(driver);
 	  
 	  //basePage = new BasePage();
 	  existingEmail = "auto"+generateNumber()+"@gmail.com";

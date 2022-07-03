@@ -20,6 +20,7 @@ public class BaseTest {
 			  throw new RuntimeException("Browser name invalid");
 		  }
 		 
+		 driverBaseTest.get(GlobalConstants.PORTAL_PAGE_URL);
 		 return driverBaseTest;
 	}
 	

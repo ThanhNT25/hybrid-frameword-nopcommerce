@@ -1,4 +1,4 @@
-package pageUIs;
+package pageUIs.nopCommerce.user;
 
 public class BasePageUI {
 	public static final String CUSTOMER_INFO_LINK = "//div[contains(@class,'block-account-navigation')]//a[text()='Customer info']";
