@@ -15,6 +15,9 @@ public class Testing {
 		
 		Topic_03_Method.showCarColor();
 		
+		Topic_04_Non_Access_Modifier topic = new Topic_04_Non_Access_Modifier();
+		System.out.println(topic.colorCar);
+		
 
 	}
 
