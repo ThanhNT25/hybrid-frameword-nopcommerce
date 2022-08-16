@@ -1,8 +1,10 @@
-package commons;
+package pageObject.jQuery;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import commons.GlobalConstants;
 
 public class BaseTest {
 
@@ -20,8 +22,8 @@ public class BaseTest {
 			  throw new RuntimeException("Browser name invalid");
 		  }
 		 
+		 //driverBaseTest.get(GlobalConstants.PORTAL_PAGE_URL);
 		 driverBaseTest.get(GlobalConstants.PORTAL_PAGE_URL_JQUERY);
-		 driverBaseTest.manage().window().maximize();
 		 return driverBaseTest;
 	}
 	
