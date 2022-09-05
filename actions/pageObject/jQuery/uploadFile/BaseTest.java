@@ -1,4 +1,4 @@
-package pageObject.jQuery;
+package pageObject.jQuery.uploadFile;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -23,7 +23,7 @@ public class BaseTest {
 		  }
 		 
 		 //driverBaseTest.get(GlobalConstants.PORTAL_PAGE_URL);
-		 driverBaseTest.get(GlobalConstants.PORTAL_PAGE_URL_JQUERY);
+		 driverBaseTest.get(GlobalConstants.PORTAL_PAGE_URL_JQUERY_UPLOAD_FILE);
 		 return driverBaseTest;
 	}
 	

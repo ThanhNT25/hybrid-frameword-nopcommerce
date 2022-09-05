@@ -20,6 +20,7 @@ import pageObjects.nopCommerce.user.UserAddressPageObject;
 import pageObjects.nopCommerce.user.UserCustomerInfoPageObject;
 import pageObjects.nopCommerce.user.UserMyProductReviewPageObject;
 import pageObjects.nopCommerce.user.UserRewardPointPageObject;
+import pageUIs.jQuery.uploadFile.BasePageUploadUI;
 import pageUIs.nopCommerce.user.BasePageUI;
 
 public class BasePage {
@@ -190,12 +191,12 @@ public class BasePage {
 	
 	public void selectItemDefaultDropdown(WebDriver driver, String locatorType, String textItem,String... dynamicValues) {
 		Select select = new Select(getWebElement(driver,  getDynamicXpath(locatorType, dynamicValues)));
-		select.selectByValue(textItem);
+		select.selectByVisibleText(textItem);
 	}
 	
 	public void selectItemDefaultDropdown(WebDriver driver, String xpathLocator, String textItem) {
 		Select select = new Select(getWebElement(driver,  xpathLocator));
-		select.selectByValue(textItem);
+		select.selectByVisibleText(textItem);
 	}
 	
 	public String getSelectedItemDefaultDropdown(WebDriver driver, String xpathLocator) {
@@ -253,16 +254,32 @@ public class BasePage {
 		return getListWebElement(driver,getDynamicXpath(locatorType, dynamicValues)).size();
 	}
 	
-	public void checkToDefaultCheckboxRadio(WebDriver driver, String xpathLocator ) {
-		WebElement element = getWebElement(driver,xpathLocator);
+	public void checkToDefaultCheckboxOrRadio(WebDriver driver, String locatorType ) {
+		WebElement element = getWebElement(driver,locatorType);
 		if(!element.isSelected()) {
 			element.click();
 		}
 				
 	}
 	
-	public void uncheckToDefaultCheckbox(WebDriver driver, String xpathLocator ) {
-		WebElement element = getWebElement(driver,xpathLocator);
+	public void checkToDefaultCheckboxOrRadio(WebDriver driver, String locatorType, String... dynamicValues ) {
+		WebElement element = getWebElement(driver,getDynamicXpath(locatorType,dynamicValues));
+		if(!element.isSelected()) {
+			element.click();
+		}
+				
+	}
+	
+	public void uncheckToDefaultCheckbox(WebDriver driver, String locatorType ) {
+		WebElement element = getWebElement(driver,locatorType);
+		if(element.isSelected()) {
+			element.click();
+		}
+				
+	}
+	
+	public void uncheckToDefaultCheckbox(WebDriver driver, String locatorType ,String... dynamicValues) {
+		WebElement element = getWebElement(driver,getDynamicXpath(locatorType,dynamicValues));
 		if(element.isSelected()) {
 			element.click();
 		}
@@ -380,6 +397,12 @@ public class BasePage {
 		}
 	}
 	
+	public boolean isImageLoaded(WebDriver driver, String LocatorType, String...dynamicValues) {
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		boolean status = (boolean) jsExecutor.executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",getWebElement(driver,getDynamicXpath(LocatorType, dynamicValues)));
+		return status;
+	}
+	
 	public void waitForElementVisible(WebDriver driver, String xpathLocator) {
 		WebDriverWait explicitWait = new WebDriverWait(driver, longTimeout);
 		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(getByLocator(xpathLocator)));
@@ -423,6 +446,16 @@ public class BasePage {
 	public void waitForElementClickable(WebDriver driver, String locatorType, String... dynamicValues) {
 		WebDriverWait explicitWait = new WebDriverWait(driver, longTimeout);
 		explicitWait.until(ExpectedConditions.elementToBeClickable(getByLocator(getDynamicXpath(locatorType, dynamicValues))));
+	}
+	
+	public void uploadMutipleFiles(WebDriver driver, String...fileNames) {
+		String filePath = GlobalConstants.UPLOAD_FILE;
+		String fullFileName ="";
+		for(String file : fileNames) {
+			fullFileName = fullFileName + filePath + file+"\n";
+		}
+		fullFileName = fullFileName.trim();
+		getWebElement(driver, BasePageUploadUI.UPLOAD_FILE).sendKeys(fullFileName);
 	}
 	
 	public UserCustomerInfoPageObject openCustomerInfoPage (WebDriver driver) {
@@ -469,5 +502,5 @@ public class BasePage {
 	}
 	
 	
-	private long longTimeout = GlobalConstants.LONG_TIME;
+	public long longTimeout = GlobalConstants.LONG_TIME;
 }

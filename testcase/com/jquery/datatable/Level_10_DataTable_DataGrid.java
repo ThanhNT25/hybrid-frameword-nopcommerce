@@ -3,11 +3,10 @@ package com.jquery.datatable;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
-import pageObject.jQuery.HomePageObject;
+import pageObject.jQuery.dataTable.HomePageObject;
+
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
-
-import java.util.Random;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
