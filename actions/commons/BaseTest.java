@@ -7,6 +7,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.opera.OperaDriver;
+import org.testng.Assert;
+import org.testng.Reporter;
 
 public class BaseTest {
 
@@ -51,4 +53,56 @@ public class BaseTest {
 		 return driverBaseTest;
 	}
 	
+	protected boolean VerifyTrue(boolean condition) {
+		boolean pass = true;
+		try {
+			if (condition == true) {
+				System.out.println(" -------------------------- PASSED -------------------------- ");
+			} else {
+				System.out.println(" -------------------------- FAILED -------------------------- ");
+			}
+			Assert.assertTrue(condition);
+		} catch (Throwable e) {
+			pass = false;
+
+			// Add lỗi vào ReportNG
+			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
+			Reporter.getCurrentTestResult().setThrowable(e);
+		}
+		return pass;
+	}
+
+
+	protected boolean verifyFailed(boolean condition) {
+		boolean pass = true;
+		try {
+			if (condition == false) {
+				System.out.println(" -------------------------- PASSED -------------------------- ");
+			} else {
+				System.out.println(" -------------------------- FAILED -------------------------- ");
+			}
+			Assert.assertFalse(condition);
+		} catch (Throwable e) {
+			pass = false;
+			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
+			Reporter.getCurrentTestResult().setThrowable(e);
+		}
+		return pass;
+	}
+
+
+	protected boolean verifyEquals(Object actual, Object expected) {
+		boolean pass = true;
+		try {
+			Assert.assertEquals(actual, expected);
+			System.out.println(" -------------------------- PASSED -------------------------- ");
+		} catch (Throwable e) {
+			pass = false;
+			System.out.println(" -------------------------- FAILED -------------------------- ");
+			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
+			Reporter.getCurrentTestResult().setThrowable(e);
+		}
+		return pass;
+	}
+
 }
