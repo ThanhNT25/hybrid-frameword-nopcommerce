@@ -1,12 +1,15 @@
 package commons;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -286,24 +289,51 @@ public class BasePage {
 				
 	}
 	
-	public boolean isElementDisplayed(WebDriver driver, String xpathLocator) {
-		return getWebElement(driver,xpathLocator).isDisplayed();
+	public boolean isElementDisplayed(WebDriver driver, String locatorlType) {
+		try {
+			return getWebElement(driver, locatorlType).isDisplayed();
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+	
+	public boolean isElementUndisplayed(WebDriver driver, String locator) {
+		overrideGlobalTime(driver, shortTimeout);
+		List<WebElement> elements = getListWebElement(driver, locator);
+				
+		overrideGlobalTime(driver, longTimeout);		
+		
+		if(elements.size()==0) {
+			return true;
+		} else if (elements.size() > 0 && !elements.get(0).isDisplayed()) {
+//			System.out.println("Case 2 - Eelement cos trong DOM nhung khong visible/display");
+//			System.out.println("End time = " +new Date().toString());
+			return true;
+		} else {
+//			System.out.println("Element in DOM and visiable");
+			return false;
+		}
+		
+	}
+	
+	public void overrideGlobalTime(WebDriver driver, long timeOut) {
+		driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
 	}
 	
 	public boolean isElementDisplayed(WebDriver driver, String locatorType, String... dynamicValues) {
 		return getWebElement(driver,getDynamicXpath(locatorType, dynamicValues)).isDisplayed();
 	}
 	
-	public boolean isElementEnable(WebDriver driver, String xpathLocator) {
-		return getWebElement(driver,xpathLocator).isEnabled();
+	public boolean isElementEnable(WebDriver driver, String locatorlType) {
+		return getWebElement(driver,locatorlType).isEnabled();
 	}
 	
-	public boolean isElementSelected(WebDriver driver, String xpathLocator) {
-		return getWebElement(driver,xpathLocator).isSelected();
+	public boolean isElementSelected(WebDriver driver, String locatorlType) {
+		return getWebElement(driver,locatorlType).isSelected();
 	}
 	
-	public void switchToFrameIframe(WebDriver driver, String xpathLocator) {
-		driver.switchTo().frame(getWebElement(driver,xpathLocator));
+	public void switchToFrameIframe(WebDriver driver, String locatorlType) {
+		driver.switchTo().frame(getWebElement(driver,locatorlType));
 	}
 	
 	public void switchToDefaultContent(WebDriver driver) {
@@ -418,6 +448,13 @@ public class BasePage {
 		explicitWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getByLocator(xpathLocator)));
 	}
 	
+	public void waitForElementUndisplayed(WebDriver driver, String locatorType) {
+		WebDriverWait expliciWait = new WebDriverWait(driver, shortTimeout);
+		overrideGlobalTime(driver, shortTimeout);
+		expliciWait.until(ExpectedConditions.invisibilityOfElementLocated(getByLocator(locatorType)));
+		overrideGlobalTime(driver, longTimeout);
+	}
+	
 	public void waitForAllElementVisible(WebDriver driver, String locatorType, String... dynamicValues) {
 		WebDriverWait explicitWait = new WebDriverWait(driver, longTimeout);
 		explicitWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getByLocator(getDynamicXpath(locatorType, dynamicValues))));
@@ -503,4 +540,6 @@ public class BasePage {
 	
 	
 	public long longTimeout = GlobalConstants.LONG_TIME;
+	public long shortTimeout = GlobalConstants.SHORT_TIME;
+	
 }

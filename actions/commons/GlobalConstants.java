@@ -7,6 +7,7 @@ public class GlobalConstants {
 	//public static final String PORTAL_PAGE_URL_JQUERY = "https://www.jqueryscript.net/demo/CRUD-Data-Grid-Plugin-jQuery-Quickgrid/";
 	public static final String PORTAL_PAGE_URL_JQUERY_DATA_TABLE = "https://www.jqueryscript.net/demo/jQuery-Dynamic-Data-Grid-Plugin-appendGrid/";
 	public static final String PORTAL_PAGE_URL_JQUERY_UPLOAD_FILE = "https://blueimp.github.io/jQuery-File-Upload/";
+	public static final String PORTAL_PAGE_URL_FACEBOOK = "https://www.facebook.com/";
 	public static final String ADMIN_PAGE_URL = "https://admin-demo.nopcommerce.com";
 	public static final String PORTAL_TESTING_URL = "https://admin-demo.nopcommerce.com";
 	public static final String ADMIN_TESTING_URL = "https://admin-demo.nopcommerce.com";

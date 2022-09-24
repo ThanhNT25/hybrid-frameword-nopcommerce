@@ -48,7 +48,7 @@ public class BaseTest {
 			  throw new RuntimeException("Browser name invalid");
 		  }
 		 
-		 driverBaseTest.get(GlobalConstants.PORTAL_PAGE_URL_JQUERY_UPLOAD_FILE);
+		 driverBaseTest.get(GlobalConstants.PORTAL_PAGE_URL_FACEBOOK);
 		 driverBaseTest.manage().window().maximize();
 		 return driverBaseTest;
 	}
