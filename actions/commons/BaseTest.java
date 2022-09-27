@@ -23,6 +23,7 @@ public class BaseTest {
 	private String projectPath = System.getProperty("user.dir");
 	
 	protected WebDriver getBrowserDriver(String browserName) {
+
 		 if(browserName.equals("firefox")) {
 			 System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 			  driverBaseTest = new FirefoxDriver();
@@ -58,6 +59,10 @@ public class BaseTest {
 		 driverBaseTest.get(GlobalConstants.PORTAL_PAGE_URL);
 		 driverBaseTest.manage().window().maximize();
 		 return driverBaseTest;
+	}
+	
+	public WebDriver getDriverInstance() {
+		return this.driverBaseTest;
 	}
 	
 	protected boolean VerifyTrue(boolean condition) {
