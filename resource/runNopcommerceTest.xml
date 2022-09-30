@@ -17,8 +17,9 @@
 		<!-- trigger cho common 01 chay truoc de lay data chay cho level 16 -->
 		<!-- <class name="com.nopcommerce.common.Common_01_Register" />
       	<class name="com.nopcommerce.user.Level_16_Share_Data" /> -->
-      	<class name="com.nopcommerce.common.Common_01_Register_Cookies" />
-      	<class name="com.nopcommerce.user.Level_16_Share_Data_A" />
+      	<!-- <class name="com.nopcommerce.common.Common_01_Register_Cookies" />
+      	<class name="com.nopcommerce.user.Level_16_Share_Data_A" /> -->
+      	<class name ="com.nopcommerce.user.Level_17_Custom_Close_Driver" />
     </classes>
  </test> 
   

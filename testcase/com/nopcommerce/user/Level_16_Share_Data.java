@@ -3,25 +3,13 @@ package com.nopcommerce.user;
 import org.testng.annotations.Test;
 
 import com.nopcommerce.common.Common_01_Register;
-
 import commons.BaseTest;
 import commons.PageGeneratorManager;
-import pageObjects.nopCommerce.user.UserAddressPageObject;
-import pageObjects.nopCommerce.user.UserCustomerInfoPageObject;
 import pageObjects.nopCommerce.user.UserHomePageObject;
 import pageObjects.nopCommerce.user.UserLoginPageObject;
-import pageObjects.nopCommerce.user.UserMyProductReviewPageObject;
-import pageObjects.nopCommerce.user.UserRegisterPageObject;
-import pageObjects.nopCommerce.user.UserRewardPointPageObject;
-
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
-
-import java.util.Random;
-
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
 public class Level_16_Share_Data extends BaseTest {
@@ -29,12 +17,8 @@ public class Level_16_Share_Data extends BaseTest {
   private String  existingEmail ;
   private String correctPassword ;
   private UserHomePageObject userHomePage  ;
-  private UserRegisterPageObject userRegisterPage  ;
   private UserLoginPageObject userLoginPage;
-  private UserCustomerInfoPageObject userCustomerInfoPage;
-  private UserAddressPageObject userAddressPage;
-  private UserMyProductReviewPageObject userMyProductReviewPage;
-  private UserRewardPointPageObject userRewardPointPage;
+
     
   @Parameters("browser")
   @BeforeClass
