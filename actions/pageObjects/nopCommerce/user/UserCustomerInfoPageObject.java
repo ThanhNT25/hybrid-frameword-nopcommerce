@@ -19,5 +19,5 @@ public class UserCustomerInfoPageObject extends BasePage {
 		return true;
 	}
 
-
+	
 }
