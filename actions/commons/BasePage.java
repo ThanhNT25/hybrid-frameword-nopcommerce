@@ -20,6 +20,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pageObject.wordpress.admin.AdminDashboardPO;
+import pageObject.wordpress.admin.UserHomePO;
 import pageObjects.nopCommerce.user.UserAddressPageObject;
 import pageObjects.nopCommerce.user.UserCustomerInfoPageObject;
 import pageObjects.nopCommerce.user.UserMyProductReviewPageObject;
@@ -188,6 +190,11 @@ public class BasePage {
 		WebElement element = getWebElement(driver, xpathLocator);
 		element.clear();
 		element.sendKeys(textValue);
+	}
+	
+	public void clearValueInElementByPressKey(WebDriver driver, String locatorType) {
+		WebElement element = this.getWebElement(driver, locatorType);
+		element.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
 	}
 	
 	public void sendkeyToElement(WebDriver driver, String locatorType, String textValue, String... dynamicValues) {
@@ -593,6 +600,16 @@ public class BasePage {
 	public String getTextboxValueByID(WebDriver driver, String textboxID) {
 		waitForElementVisible(driver,BasePageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
 		return getElementAttribute(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID,"value", textboxID);
+	}
+
+	public UserHomePO openEndUserSite(WebDriver driver, String endUserUrl) {
+		openUrlPage(driver, endUserUrl);
+		return pageObject.wordpress.admin.PageGeneratorManager.getUserHomePage(driver);
+	}
+
+	public AdminDashboardPO openAdminSite(WebDriver driver, String adminUrl) {
+		openUrlPage(driver, adminUrl);
+		return pageObject.wordpress.admin.PageGeneratorManager.getAdminDashboardPage(driver);
 	}
 
 

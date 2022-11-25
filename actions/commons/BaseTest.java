@@ -1,9 +1,11 @@
 package commons;
 
 import java.io.IOException;
+import java.util.Random;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -58,13 +60,56 @@ public class BaseTest {
 			  throw new RuntimeException("Browser name invalid");
 		  }
 		 
-		 driverBaseTest.get(GlobalConstants.PORTAL_PAGE_URL);
+		 driverBaseTest.get(GlobalConstants.PORTAL_PAGE_URL_WORDPRESS);
+		 driverBaseTest.manage().window().maximize();
+		 return driverBaseTest;
+	}
+	
+	protected WebDriver getBrowserDriver(String browserName, String appUrl) {
+		 if(browserName.equals("firefox")) {
+			 System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+			  driverBaseTest = new FirefoxDriver();
+		  } else if (browserName.equals("h_firefox")) {
+			  System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+			  FirefoxOptions options = new FirefoxOptions();
+			  options.addArguments(".headless");
+			  options.addArguments("window-size-1920x1080");
+			  driverBaseTest = new FirefoxDriver(options);
+			  
+		  } else if  (browserName.equals("chrome")){ 
+			  System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
+			  driverBaseTest = new ChromeDriver();
+			  
+		  } else if  (browserName.equals("h_chrome")){ 
+			  System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
+			  ChromeOptions options = new ChromeOptions();
+			  options.addArguments("--headless");
+			  options.addArguments("window-size-1920x1080");
+			  driverBaseTest = new ChromeDriver();
+			  
+		  } else if  (browserName.equals("edge")){ 
+			  System.setProperty("webdriver.edge.driver", projectPath + "\\browserDrivers\\msedgedriver.exe");
+			  driverBaseTest = new EdgeDriver();
+			  
+		  }  else if  (browserName.equals("opera")){ 
+			  System.setProperty("webdriver.opera.driver", projectPath + "\\browserDrivers\\operadriver.exe");
+			  driverBaseTest = new OperaDriver();
+		  } else {
+			  throw new RuntimeException("Browser name invalid");
+		  }
+		 
+		 driverBaseTest.get(GlobalConstants.PORTAL_PAGE_URL_WORDPRESS);
 		 driverBaseTest.manage().window().maximize();
 		 return driverBaseTest;
 	}
 	
 	public WebDriver getDriverInstance() {
 		return this.driverBaseTest;
+	}
+	
+	protected int generateFakeNumber() {
+		Random rand = new Random();
+		return rand.nextInt(9999);
 	}
 	
 	protected boolean VerifyTrue(boolean condition) {
@@ -180,4 +225,58 @@ public class BaseTest {
 		}
 	}
 
+	protected String getCurrentDate() {
+		DateTime nowUTC = new DateTime();
+		int day = nowUTC.getDayOfMonth();
+		if(day < 10) {
+			String dayValue = "0" + day;
+			return dayValue;
+		}
+		return String.valueOf(day);
+	}
+	
+	protected String getCurrentMonth() {
+		DateTime now = new DateTime();
+		int month = now.getMonthOfYear();
+		String valueMonth ;
+		if (month == 1) {
+			return valueMonth ="January";
+		} else if (month == 2) {
+			return valueMonth ="February";
+		} else if (month == 3) {
+			return valueMonth ="March";
+		} else if (month == 4) {
+			return valueMonth ="April";
+		} else if (month == 5) {
+			return valueMonth ="May";
+		} else if (month == 6) {
+			return valueMonth ="Jule";
+		} else if (month == 7) {
+			return valueMonth ="July";
+		} else if (month == 8) {
+			return valueMonth ="August";
+		} else if (month == 9) {
+			return valueMonth ="ASeptemberpril";
+		} else if (month == 10) {
+			return valueMonth ="October";
+		} else if (month == 11) {
+			return valueMonth ="November";
+		} else if (month == 12) {
+			return valueMonth ="December";
+		} 
+		return String.valueOf(month);
+	}
+
+	protected String getCurrentYear() {
+		DateTime now = new DateTime();
+		return now.getYear() + "";
+	}
+
+//	protected String getCurrentDay() {
+//		return  getCurrentDate() + "/" + getCurrentMonth() + "/" +getCurrentYear();
+//	}
+	
+	protected String getCurrentDay() {
+		return getCurrentMonth() + " " + getCurrentDate() + ", " +getCurrentYear();
+	}
 }
