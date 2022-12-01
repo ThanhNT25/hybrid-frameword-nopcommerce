@@ -13,7 +13,7 @@ import pageObject.wordpress.admin.AdminPostSearchPO;
 import pageObject.wordpress.admin.PageGeneratorManager;
 import pageObject.wordpress.admin.UserHomePO;
 import pageObject.wordpress.admin.UserPostDetailPO;
-import pageObject.wordpress.admin.UserPostSearchPO;
+import pageObject.wordpress.admin.UserSearchPostPO;
 
 public class Post_01_Create_Read_Update_Delete_Search extends BaseTest {
 	private WebDriver driver;
@@ -22,8 +22,9 @@ public class Post_01_Create_Read_Update_Delete_Search extends BaseTest {
 	AdminPostSearchPO adminPostSearchPage;
 	AdminPostAddNewPO adminPostAddNewPage;
 	UserHomePO userHomePage;
-	UserPostSearchPO userPostSearchPage;
+	UserSearchPostPO userPostSearchPage;
 	UserPostDetailPO userPostDetailPage;
+	
 	
 	String adminUsername = "automation";
 	String adminPassword = "automation";
@@ -151,6 +152,60 @@ public class Post_01_Create_Read_Update_Delete_Search extends BaseTest {
 		
 		log.info("Edit_Post - Step 09: Verify 'Post published' message is display");
 		VerifyTrue(adminPostAddNewPage.isPostPublishMessageDissplay("Post updated."));
+		
+		
+	}
+	
+	@Test
+	public void TC_04_Delete_Post() {
+		log.info("Edit_Post - Step 01: Open Admin url");
+		adminDashboardPage = userPostDetailPage.openAdminSite(driver, this.adminUrl);
+		
+		log.info("Edit_Post - Step 02: Click to 'Post' menu link");
+		adminPostSearchPage= adminDashboardPage.clickToPostMenuLink();
+		
+		log.info("Edit_Post - Step 03: Enter to search textbox");	
+		adminPostSearchPage.enterToSearchTextbox(postTitle);
+		
+		log.info("Edit_Post - Step 04: Click to 'Search Posts' button");	
+		adminPostSearchPage.clickToSearchPostsButton();
+		
+		log.info("Delete_Post - Step 05: Select Post detail checkbox");	
+		adminPostSearchPage.selectPostCheckboxByTitle(postTitleUpdate);
+		
+		log.info("Delete_Post - Step 06: Select 'Move to Trash' item in dropdown");	
+		adminPostSearchPage.selectTextItemInActionDropdown("Move to Trash");
+		
+		log.info("Delete_Post - Step 07: Click to 'Apply' button");	
+		adminPostSearchPage.clickToApplyButton();
+		
+		log.info("Delete_Post - Step 08: Verify '1 post moved ti the Trash.' message is display");	
+		VerifyTrue(adminPostSearchPage.isMoveToTrashMessageDisplayed("1 post moved to the Trash."));
+		
+		log.info("Delete_Post - Step 09 Enter to search textbox");	
+		adminPostSearchPage.enterToSearchTextbox(postTitle);
+		
+		log.info("Delete_Post - Step 10: Click to 'Search Posts' button");	
+		adminPostSearchPage.clickToSearchPostsButton();
+		
+		log.info("Delete_Post - Step 11: Verify 'No posts found' message is displayed");
+		VerifyTrue(adminPostSearchPage.isNoPostFoundMessageDisplayed("No posts found."));
+		
+		log.info("Delete_Post - Step 12: Open End User site");
+		userHomePage = adminPostSearchPage.openEndUserSite(driver, this.endUserUrl);
+		
+		log.info("Delete_Post - Step 13: Verify post title undisplayed at Home page");
+		VerifyTrue(userHomePage.isPostInforUndisplayedWithPostTitle(postTitleUpdate));
+		
+		log.info("Delete_Post - Step 14: Enter to Search textbox");
+		userHomePage.enterToSearchTextbox(postTitleUpdate);
+		
+		log.info("Delete_Post - Step 15: Click to 'Search' button");
+		userPostSearchPage = userHomePage.clickToSearchButton();
+		
+		log.info("Delete_Post - Step 16: Verify 'Nothing Found' message is displayed");
+		VerifyTrue(userPostSearchPage.isPostInforUndisplayedWithPostTitle(postTitleUpdate));
+
 		
 		
 	}

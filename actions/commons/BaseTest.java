@@ -228,10 +228,10 @@ public class BaseTest {
 	protected String getCurrentDate() {
 		DateTime nowUTC = new DateTime();
 		int day = nowUTC.getDayOfMonth();
-		if(day < 10) {
-			String dayValue = "0" + day;
-			return dayValue;
-		}
+//		if(day < 10) {
+//			String dayValue = "0" + day;
+//			return dayValue;
+//		}
 		return String.valueOf(day);
 	}
 	

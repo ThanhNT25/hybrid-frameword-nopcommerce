@@ -339,6 +339,24 @@ public class BasePage {
 		
 	}
 	
+	public boolean isElementUndisplayed(WebDriver driver, String locator, String...dynamicValues) {
+		overrideGlobalTime(driver, shortTimeout);
+		List<WebElement> elements = getListWebElement(driver,getDynamicXpath( locator, dynamicValues));
+		overrideGlobalTime(driver, longTimeout);		
+		
+		if(elements.size()==0) {
+			return true;
+		} else if (elements.size() > 0 && !elements.get(0).isDisplayed()) {
+//			System.out.println("Case 2 - Eelement cos trong DOM nhung khong visible/display");
+//			System.out.println("End time = " +new Date().toString());
+			return true;
+		} else {
+//			System.out.println("Element in DOM and visiable");
+			return false;
+		}
+		
+	}
+	
 	public void overrideGlobalTime(WebDriver driver, long timeOut) {
 		driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
 	}
