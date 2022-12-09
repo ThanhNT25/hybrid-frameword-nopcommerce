@@ -18,7 +18,7 @@
       	<class name ="com.wordpress.admin.Post_01_Create_Read_Update_Delete_Search" />
   </classes> 
     
-    <!-- <packages>
+   <!--  <packages>
     	<packages name="com.wordpress.admin" />
     </packages> -->
  </test> 

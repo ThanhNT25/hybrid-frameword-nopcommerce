@@ -3,8 +3,8 @@ package commons;
 import java.io.File;
 
 public class GlobalConstants {
-	//public static final String PORTAL_PAGE_URL = "https://demo.nopcommerce.com";
-	public static final String PORTAL_PAGE_URL_WORDPRESS = "http://localhost/automation/wp-admin/";
+	public static final String PORTAL_PAGE_URL = "https://demo.nopcommerce.com";
+	//public static final String PORTAL_PAGE_URL_WORDPRESS = "http://localhost/automation/wp-admin/";
 	//public static final String PORTAL_PAGE_URL_JQUERY = "https://www.jqueryscript.net/demo/CRUD-Data-Grid-Plugin-jQuery-Quickgrid/";
 	public static final String PORTAL_PAGE_URL_JQUERY_DATA_TABLE = "https://www.jqueryscript.net/demo/jQuery-Dynamic-Data-Grid-Plugin-appendGrid/";
 	public static final String PORTAL_PAGE_URL_JQUERY_UPLOAD_FILE = "https://blueimp.github.io/jQuery-File-Upload/";

@@ -21,87 +21,149 @@ public class BaseTest {
 	private WebDriver driverBaseTest;
 	protected final Log log;
 	
+	public void initBeforeSuite() {
+		
+	}
+	
 	protected BaseTest() {
 		log = LogFactory.getLog(getClass());
 	}
 	private String projectPath = System.getProperty("user.dir");
 	
 	protected WebDriver getBrowserDriver(String browserName) {
+		BrowserList browserList = BrowserList.valueOf(browserName.toUpperCase());
 
-		 if(browserName.equals("firefox")) {
+		 if(browserList == BrowserList.FIREFOX) {
 			 System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 			  driverBaseTest = new FirefoxDriver();
-		  } else if (browserName.equals("h_firefox")) {
+		  } else if (browserList == BrowserList.H_FIREFOX) {
 			  System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 			  FirefoxOptions options = new FirefoxOptions();
 			  options.addArguments(".headless");
 			  options.addArguments("window-size-1920x1080");
 			  driverBaseTest = new FirefoxDriver(options);
 			  
-		  } else if  (browserName.equals("chrome")){ 
+		  } else if  (browserList == BrowserList.CHROME){ 
 			  System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
 			  driverBaseTest = new ChromeDriver();
 			  
-		  } else if  (browserName.equals("h_chrome")){ 
+		  } else if  (browserList == BrowserList.H_CHROME){ 
 			  System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
 			  ChromeOptions options = new ChromeOptions();
 			  options.addArguments("--headless");
 			  options.addArguments("window-size-1920x1080");
-			  driverBaseTest = new ChromeDriver();
+			  driverBaseTest = new ChromeDriver(options);
 			  
-		  } else if  (browserName.equals("edge")){ 
+		  } else if  (browserList == BrowserList.EDGE){ 
 			  System.setProperty("webdriver.edge.driver", projectPath + "\\browserDrivers\\msedgedriver.exe");
 			  driverBaseTest = new EdgeDriver();
 			  
-		  }  else if  (browserName.equals("opera")){ 
+		  }  else if  (browserList == BrowserList.OPERA){ 
 			  System.setProperty("webdriver.opera.driver", projectPath + "\\browserDrivers\\operadriver.exe");
 			  driverBaseTest = new OperaDriver();
 		  } else {
 			  throw new RuntimeException("Browser name invalid");
 		  }
 		 
-		 driverBaseTest.get(GlobalConstants.PORTAL_PAGE_URL_WORDPRESS);
+		 driverBaseTest.get(GlobalConstants.PORTAL_PAGE_URL);
 		 driverBaseTest.manage().window().maximize();
 		 return driverBaseTest;
 	}
 	
 	protected WebDriver getBrowserDriver(String browserName, String appUrl) {
-		 if(browserName.equals("firefox")) {
+		BrowserList browserList = BrowserList.valueOf(browserName.toUpperCase());
+		 if(browserList == BrowserList.FIREFOX) {
 			 System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 			  driverBaseTest = new FirefoxDriver();
-		  } else if (browserName.equals("h_firefox")) {
+		  } else if (browserList == BrowserList.H_FIREFOX) {
 			  System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 			  FirefoxOptions options = new FirefoxOptions();
 			  options.addArguments(".headless");
 			  options.addArguments("window-size-1920x1080");
 			  driverBaseTest = new FirefoxDriver(options);
 			  
-		  } else if  (browserName.equals("chrome")){ 
+		  } else if  (browserList == BrowserList.CHROME){ 
 			  System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
 			  driverBaseTest = new ChromeDriver();
 			  
-		  } else if  (browserName.equals("h_chrome")){ 
+		  } else if  (browserList == BrowserList.H_CHROME){ 
 			  System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
 			  ChromeOptions options = new ChromeOptions();
 			  options.addArguments("--headless");
 			  options.addArguments("window-size-1920x1080");
-			  driverBaseTest = new ChromeDriver();
+			  driverBaseTest = new ChromeDriver(options);
 			  
-		  } else if  (browserName.equals("edge")){ 
+		  } else if  (browserList == BrowserList.EDGE){ 
 			  System.setProperty("webdriver.edge.driver", projectPath + "\\browserDrivers\\msedgedriver.exe");
 			  driverBaseTest = new EdgeDriver();
 			  
-		  }  else if  (browserName.equals("opera")){ 
+		  }  else if  (browserList == BrowserList.OPERA){ 
 			  System.setProperty("webdriver.opera.driver", projectPath + "\\browserDrivers\\operadriver.exe");
 			  driverBaseTest = new OperaDriver();
 		  } else {
 			  throw new RuntimeException("Browser name invalid");
 		  }
 		 
-		 driverBaseTest.get(GlobalConstants.PORTAL_PAGE_URL_WORDPRESS);
+		 driverBaseTest.get(appUrl);
 		 driverBaseTest.manage().window().maximize();
 		 return driverBaseTest;
 	}
+	
+	
+	protected WebDriver getBrowserDriverEnvironment(String browserName, String environmentName) {
+		BrowserList browserList = BrowserList.valueOf(browserName.toUpperCase());
+		 if(browserList == BrowserList.FIREFOX) {
+			 System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+			  driverBaseTest = new FirefoxDriver();
+		  } else if (browserList == BrowserList.H_FIREFOX) {
+			  System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+			  FirefoxOptions options = new FirefoxOptions();
+			  options.addArguments(".headless");
+			  options.addArguments("window-size-1920x1080");
+			  driverBaseTest = new FirefoxDriver(options);
+			  
+		  } else if  (browserList == BrowserList.CHROME){ 
+			  System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
+			  driverBaseTest = new ChromeDriver();
+			  
+		  } else if  (browserList == BrowserList.H_CHROME){ 
+			  System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
+			  ChromeOptions options = new ChromeOptions();
+			  options.addArguments("--headless");
+			  options.addArguments("window-size-1920x1080");
+			  driverBaseTest = new ChromeDriver(options);
+			  
+		  } else if  (browserList == BrowserList.EDGE){ 
+			  System.setProperty("webdriver.edge.driver", projectPath + "\\browserDrivers\\msedgedriver.exe");
+			  driverBaseTest = new EdgeDriver();
+			  
+		  }  else if  (browserList == BrowserList.OPERA){ 
+			  System.setProperty("webdriver.opera.driver", projectPath + "\\browserDrivers\\operadriver.exe");
+			  driverBaseTest = new OperaDriver();
+		  } else {
+			  throw new RuntimeException("Browser name invalid");
+		  }
+		 
+		 driverBaseTest.get(environmentName);
+		 driverBaseTest.manage().window().maximize();
+		 return driverBaseTest;
+	}
+	
+	private String getEnvironmentUrl(String serverName) {
+		String envUrl = null;
+		EnvironmentList environment = EnvironmentList.valueOf(serverName.toUpperCase());
+		if(environment == EnvironmentList.DEV) {
+			envUrl = "https://demo.nopcommerce.com/";
+		} else if(environment == EnvironmentList.TESTING) {
+			envUrl = "https://admin.demo.nopcommerce.com/";
+		}  else if(environment == EnvironmentList.STAGING) {
+			envUrl = "https://staging.orangehrmlive.com/";
+		}  else if(environment == EnvironmentList.PRODUCT) {
+			envUrl = "https://production.orangehrmlive.com/";
+		}
+		return envUrl;
+	}
+	
 	
 	public WebDriver getDriverInstance() {
 		return this.driverBaseTest;
