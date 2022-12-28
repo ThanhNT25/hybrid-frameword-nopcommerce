@@ -20,7 +20,7 @@
       	<!-- <class name="com.nopcommerce.common.Common_01_Register_Cookies" />
       	<class name="com.nopcommerce.user.Level_16_Share_Data_A" /> -->
       	<!-- <class name ="com.nopcommerce.user.Level_17_Custom_Close_Driver" /> -->
-      	<class name ="com.nopcommerce.user.Level_18_Pattern_Object" />
+      	<class name ="com.nopcommerce.user.Level_20_Manage_Data" />
     </classes>
  </test> 
   
