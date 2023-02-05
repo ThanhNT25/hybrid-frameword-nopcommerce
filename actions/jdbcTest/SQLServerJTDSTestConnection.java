@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class SQLServerJTDSTestConnection {
 	public static Connection getMyConnection() throws SQLException, ClassNotFoundException{
-		return SQLServerConnUtils.getSQLServerConnection();
+		return SQLServerJTDSConnUtils.getSQLServerConnection();
 		
 	}
 	
